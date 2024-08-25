@@ -60,7 +60,7 @@ dataLinks:
   - name: tm_beacon
     class: org.yamcs.tctm.UdpTmDataLink
     stream: tmr_beacon
-    port: 11015 # GS-Modem beacon telemetry port
+    port: 10015 # GS-Modem beacon telemetry port
     invalidPackets: DIVERT
     invalidPacketsStream: invalid_tm_stream
     packetPreprocessorClassName: org.yamcs.tctm.GenericPacketPreprocessor
@@ -73,7 +73,7 @@ dataLinks:
   - name: tm_edl
     class: org.yamcs.tctm.ccsds.UdpTmFrameLink
     errorDetection: NONE
-    port: 11016 # GS-Modem USLP telemetry port
+    port: 10016 # GS-Modem USLP telemetry port
     frameType: USLP # Process all TM with USLP header
     spacecraftId: 0x4F53 # "OS" in ASCII
     badFrameStream: invalid_tm_stream # Process unrecognized TM here
@@ -108,7 +108,7 @@ dataLinks:
     priorityScheme: ABSOLUTE
     stream: tcr_edl
     host: localhost # GS-Modem Address
-    port: 11025 # GS-Modem USLP telecommand port
+    port: 10025 # GS-Modem USLP telecommand port
     spacecraftId: 0x4F53 # "OS" in ASCII
     maxFrameLength: 4096 # Global max packet-size 4 kb
 
@@ -138,12 +138,12 @@ dataLinks:
 
 mdb:
   - type: xtce
-    spec: mdb/oresat0.xtce
+    spec: mdb/oresat0_5.xtce
 
 streamConfig:
   tm:
     - name: tmr_beacon
-      rootContainer: /oresat0/beacon
+      rootContainer: /oresat0_5/beacon
     
     - name: tmr_edl
       processor: realtime
@@ -155,6 +155,7 @@ streamConfig:
   
   tc:
     - name: tcr_edl
+      rootContainer: /oresat0_5/edl_responses
       processor: realtime
 
     - name: cfdp_out
