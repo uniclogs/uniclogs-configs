@@ -31,7 +31,7 @@ services:
     args:
      inactivityTimeout: 30000
      sequenceNrLength: 4
-     maxPduSize: 978  # Max size that can fit in a 1024 max size USLP frame
+     maxPduSize: 976  # Max size that can fit in a 1024 max size USLP frame
      incomingBucket: groundstation
      allowRemoteProvidedBucket: false
      allowRemoteProvidedSubdirectory: false
@@ -84,7 +84,7 @@ dataLinks:
     badFrameStream: invalid_tm_stream # Process unrecognized TM here
     clcwStream: "clcw" #publish the received CLCW (OCF field) to this stream
     minFrameLength: 14 # 7 + 4 + 1 + 2. Needed so that insert zone doesn't throw an error.
-    maxFrameLength: 65535 # Global max packet-size 2^16 B
+    maxFrameLength: 1024 # Oresat limits things to this size packet. We should consider increasing this if the radio link is good enough.
     encryption:
       - spi: 1
         class: org.uniclogs.yamcs.security.sdls.SecurityAssociationOresatSdlsFactory
@@ -114,9 +114,6 @@ dataLinks:
         stream: cfdp_in
         vcaHandlerClassName: org.uniclogs.yamcs.tctm.CfdpVc1DownlinkHandler
         vcaHandlerArgs:
-          hmacKeyHex: "0000000000000000000000000000000000000000000000000000000000000000" # no longer needed beacase hell yeah.
-          verifyHmac: false
-          stripFecf: false # If we use the COP-1 branch of the c3 to test against, this instead strips part of the PDU.
           cfdpStream: cfdp_in
         packetPreprocessorClassName: org.yamcs.tctm.GenericPacketPreprocessor
         packetPreprocessorArgs:
@@ -124,7 +121,7 @@ dataLinks:
           seqCountOffset: -1
           errorDetection:
             type: "NONE"
-      - vcId: 2
+      - vcId: 2 # VCID used for receiving CLCW stream.
         service: IDLE
 
   - name: tc_edl
@@ -152,7 +149,7 @@ dataLinks:
       vcfCountLength: 2 # number of bytes used for the VC frame count field (0-7)
       clcwStream: "clcw" #publish the received CLCW (OCF field) to this stream
       initialClcwWait: 3600
-      maxPacketLength: 1000 # Changing this temporarily because the c3 isn't setup to get USLP frames larger than 1024
+      maxPacketLength: 976 # Changing this temporarily because the c3 isn't setup to get USLP frames larger than 1024
       stream: tcr_edl 
       # commandPostprocessorClassName: org.yamcs.tctm.IssCommandPostprocessor
       # commandPostprocessorArgs:
@@ -166,7 +163,7 @@ dataLinks:
       encryptionSpis: [1]
       service: PACKET
       priority: 0
-      maxPacketLength: 1000 # Changing this temporarily because the c3 isn't setup to get USLP frames larger than 1024
+      maxPacketLength: 976 # Changing this temporarily because the c3 isn't setup to get USLP frames larger than 1024
       stream: cfdp_tc
       # commandPostprocessorClassName: org.uniclogs.yamcs.tctm.EdlCommandPostprocessor
       # commandPostprocessorArgs:
