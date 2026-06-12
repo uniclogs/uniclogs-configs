@@ -7,7 +7,7 @@ services:
         allowOrigin: "*"
         allowCredentials: false
 
-dataDir: yamcs-data
+dataDir: ../../yamcs-data # should be in the root directory of the repo. Should be updated later, but for testing should be decent.
 
 instances:
   - oresat0
