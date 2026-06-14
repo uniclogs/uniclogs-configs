@@ -71,7 +71,7 @@ dataLinks:
     invalidPacketsStream: invalid_tm_stream
     packetPreprocessorClassName: org.yamcs.tctm.GenericPacketPreprocessor
     packetPreprocessorArgs:
-      packetSize: 269
+      packetSize: 1007
       seqCountOffset: -1
       timestampOffset: -1
 
@@ -187,7 +187,7 @@ mdb:
 streamConfig:
   tm:
     - name: tmr_beacon
-      rootContainer: /oresat0_5_beacon/Beacon
+      rootContainer: /sentinel_leop/Beacon
     
     - name: tmr_edl
       processor: realtime

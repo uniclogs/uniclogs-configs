@@ -12,6 +12,7 @@ dataDir: ../../yamcs-data # should be in the root directory of the repo. Should 
 instances:
   - oresat0
   - oresat0_5
+  - sentinel
 
 secretKey: <CHANGE THIS VALUE>
 

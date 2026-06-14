@@ -37,6 +37,7 @@
         </StringDataEncoding>
       </StringParameterType>
       <EnumeratedParameterType name="uint8_c3_satellite_id_type">
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="8" />
         <EnumerationList>
           <Enumeration value="1" label="oresat0" />
           <Enumeration value="2" label="oresat0_5" />
@@ -49,6 +50,7 @@
         <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="8" />
       </IntegerParameterType>
       <EnumeratedParameterType name="uint8_c3_status_type">
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="8" />
         <EnumerationList>
           <Enumeration value="66" label="pre_deply" />
           <Enumeration value="67" label="deploy" />
@@ -86,6 +88,7 @@
         <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="twosComplement" sizeInBits="8" />
       </IntegerParameterType>
       <EnumeratedParameterType name="uint8_adcs_manager_mode_type">
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="8" />
         <EnumerationList>
           <Enumeration value="0" label="none" />
           <Enumeration value="1" label="standby" />
@@ -123,6 +126,7 @@
         <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="16" />
       </IntegerParameterType>
       <EnumeratedParameterType name="uint8_star_tracker_1_status_type">
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="8" />
         <EnumerationList>
           <Enumeration value="0" label="off" />
           <Enumeration value="1" label="boot" />
@@ -134,6 +138,7 @@
         </EnumerationList>
       </EnumeratedParameterType>
       <EnumeratedParameterType name="uint8_gps_status_type">
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="8" />
         <EnumerationList>
           <Enumeration value="0" label="off" />
           <Enumeration value="1" label="searching" />
@@ -142,6 +147,7 @@
         </EnumerationList>
       </EnumeratedParameterType>
       <EnumeratedParameterType name="uint8_gps_skytraq_fix_mode_type">
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="8" />
         <EnumerationList>
           <Enumeration value="0" label="no_fix" />
           <Enumeration value="1" label="2d" />
