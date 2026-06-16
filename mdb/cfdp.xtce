@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<SpaceSystem name="cfdp" xmlns="http://www.omg.org/spec/XTCE/20180204" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.omg.org/spec/XTCE/20180204 https://www.omg.org/spec/XTCE/20180204/SpaceSystem.xsd">
+  <Header validationStatus="Working" classification="NotClassified" version="0.7.3.dev31+g272cf4c" date="2024-08-24">
+    <AuthorSet>
+      <Author>PSAS (Portland State Aerospace Society)</Author>
+    </AuthorSet>
+  </Header>
+  <CommandMetaData>
+    <MetaCommandSet>
+      <MetaCommand name="cfdp_pdu" shortDescription="This needs to exist for the uplink handler to not complain about CFDP.">
+      </MetaCommand>
+    </MetaCommandSet>
+  </CommandMetaData>
+</SpaceSystem>

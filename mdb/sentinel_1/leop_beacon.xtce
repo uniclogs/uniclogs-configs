@@ -1,0 +1,754 @@
+<?xml version='1.0' encoding='utf-8'?>
+<SpaceSystem name="sentinel_leop" xmlns="http://www.omg.org/spec/XTCE/20180204" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.omg.org/spec/XTCE/20180204 https://www.omg.org/spec/XTCE/20180204/SpaceSystem.xsd">
+  <Header validationStatus="Working" classification="NotClassified" version="0.0" date="2026-06-02">
+    <AuthorSet>
+      <Author>PSAS (Portland State Aerospace Society)</Author>
+    </AuthorSet>
+  </Header>
+  <TelemetryMetaData>
+    <ParameterTypeSet>
+      <IntegerParameterType name="uint32_type">
+        <UnitSet />
+        <IntegerDataEncoding bitOrder="leastSignificantBitFirst" encoding="unsigned" sizeInBits="32" />
+      </IntegerParameterType>
+      <BinaryParameterType name="b128_type" shortDescription="128 bitfield">
+        <UnitSet />
+        <BinaryDataEncoding bitOrder="leastSignificantBitFirst">
+          <SizeInBits>
+            <FixedValue>128</FixedValue>
+          </SizeInBits>
+        </BinaryDataEncoding>
+      </BinaryParameterType>
+      <AbsoluteTimeParameterType name="unix_time" shortDescription="Unix coarse timestamp">
+        <Encoding>
+          <IntegerDataEncoding byteOrder="leastSignificantByteFirst" sizeInBits="32" />
+        </Encoding>
+        <ReferenceTime>
+          <Epoch>1970-01-01T00:00:00.000</Epoch>
+        </ReferenceTime>
+      </AbsoluteTimeParameterType>
+      <StringParameterType name="string24_type">
+        <StringDataEncoding encoding="UTF-8">
+          <SizeInBits>
+            <Fixed>
+              <FixedValue>24</FixedValue>
+            </Fixed>
+          </SizeInBits>
+        </StringDataEncoding>
+      </StringParameterType>
+      <EnumeratedParameterType name="uint8_c3_satellite_id_type">
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="8" />
+        <EnumerationList>
+          <Enumeration value="1" label="oresat0" />
+          <Enumeration value="2" label="oresat0_5" />
+          <Enumeration value="3" label="oresat1" />
+          <Enumeration value="100" label="sentinel" />
+        </EnumerationList>
+      </EnumeratedParameterType>
+      <IntegerParameterType name="uint8_type" signed="false">
+        <UnitSet />
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="8" />
+      </IntegerParameterType>
+      <EnumeratedParameterType name="uint8_c3_status_type">
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="8" />
+        <EnumerationList>
+          <Enumeration value="66" label="pre_deply" />
+          <Enumeration value="67" label="deploy" />
+          <Enumeration value="68" label="standby" />
+          <Enumeration value="69" label="beacon" />
+          <Enumeration value="70" label="edl" />
+        </EnumerationList>
+      </EnumeratedParameterType>
+      <IntegerParameterType name="uint32_s_type" signed="false">
+        <UnitSet>
+          <Unit description="s">s</Unit>
+        </UnitSet>
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="32" />
+      </IntegerParameterType>
+      <IntegerParameterType name="unix_time_type" signed="false">
+        <UnitSet>
+          <Unit description="s">s</Unit>
+        </UnitSet>
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="32" />
+      </IntegerParameterType>
+      <IntegerParameterType name="uint16_type" signed="false">
+        <UnitSet />
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="16" />
+      </IntegerParameterType>
+      <IntegerParameterType name="uint32_B_type" signed="false">
+        <UnitSet>
+          <Unit description="B">B</Unit>
+        </UnitSet>
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="32" />
+      </IntegerParameterType>
+      <IntegerParameterType name="int8_dB_type" signed="true">
+        <UnitSet>
+          <Unit description="dB">dB</Unit>
+        </UnitSet>
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="twosComplement" sizeInBits="8" />
+      </IntegerParameterType>
+      <EnumeratedParameterType name="uint8_adcs_manager_mode_type">
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="8" />
+        <EnumerationList>
+          <Enumeration value="0" label="none" />
+          <Enumeration value="1" label="standby" />
+          <Enumeration value="2" label="hold" />
+          <Enumeration value="3" label="calibrate" />
+          <Enumeration value="4" label="spindown" />
+          <Enumeration value="5" label="detumble" />
+          <Enumeration value="6" label="bbq" />
+          <Enumeration value="7" label="point" />
+          <Enumeration value="8" label="manual" />
+        </EnumerationList>
+      </EnumeratedParameterType>
+      <IntegerParameterType name="uint16_mV_type" signed="false">
+        <UnitSet>
+          <Unit description="mV">mV</Unit>
+        </UnitSet>
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="16" />
+      </IntegerParameterType>
+      <IntegerParameterType name="int16_mA_type" signed="true">
+        <UnitSet>
+          <Unit description="mA">mA</Unit>
+        </UnitSet>
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="twosComplement" sizeInBits="16" />
+      </IntegerParameterType>
+      <IntegerParameterType name="int8_C_type" signed="true">
+        <UnitSet>
+          <Unit description="C">C</Unit>
+        </UnitSet>
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="twosComplement" sizeInBits="8" />
+      </IntegerParameterType>
+      <IntegerParameterType name="uint16_mW_type" signed="false">
+        <UnitSet>
+          <Unit description="mW">mW</Unit>
+        </UnitSet>
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="16" />
+      </IntegerParameterType>
+      <EnumeratedParameterType name="uint8_star_tracker_1_status_type">
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="8" />
+        <EnumerationList>
+          <Enumeration value="0" label="off" />
+          <Enumeration value="1" label="boot" />
+          <Enumeration value="2" label="standby" />
+          <Enumeration value="3" label="low_power" />
+          <Enumeration value="4" label="star_track" />
+          <Enumeration value="5" label="capture" />
+          <Enumeration value="255" label="error" />
+        </EnumerationList>
+      </EnumeratedParameterType>
+      <EnumeratedParameterType name="uint8_gps_status_type">
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="8" />
+        <EnumerationList>
+          <Enumeration value="0" label="off" />
+          <Enumeration value="1" label="searching" />
+          <Enumeration value="2" label="locked" />
+          <Enumeration value="255" label="error" />
+        </EnumerationList>
+      </EnumeratedParameterType>
+      <EnumeratedParameterType name="uint8_gps_skytraq_fix_mode_type">
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="unsigned" sizeInBits="8" />
+        <EnumerationList>
+          <Enumeration value="0" label="no_fix" />
+          <Enumeration value="1" label="2d" />
+          <Enumeration value="2" label="3d" />
+          <Enumeration value="3" label="3d_dgps" />
+        </EnumerationList>
+      </EnumeratedParameterType>
+      <IntegerParameterType name="int16_degps_type" signed="true">
+        <UnitSet>
+          <Unit description="deg/s">deg/s</Unit>
+        </UnitSet>
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="twosComplement" sizeInBits="16" />
+      </IntegerParameterType>
+      <IntegerParameterType name="int32_km_type" signed="true">
+        <UnitSet>
+          <Unit description="km">km</Unit>
+        </UnitSet>
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="twosComplement" sizeInBits="32">
+          <DefaultCalibrator>
+            <PolynomialCalibrator>
+              <Term exponent="1" coefficient="1e-05" />
+            </PolynomialCalibrator>
+          </DefaultCalibrator>
+        </IntegerDataEncoding>
+      </IntegerParameterType>
+      <IntegerParameterType name="int32_s_type" signed="true">
+        <UnitSet>
+          <Unit description="s">s</Unit>
+        </UnitSet>
+        <IntegerDataEncoding byteOrder="leastSignificantByteFirst" encoding="twosComplement" sizeInBits="32" />
+      </IntegerParameterType>
+    </ParameterTypeSet>
+    <ParameterSet>
+      <Parameter name="ax25_header" parameterTypeRef="b128_type" shortDescription="AX.25 Header" />
+      <Parameter name="c3_beacon_start_chars" parameterTypeRef="string24_type" shortDescription="the aprs start characters" />
+      <Parameter name="c3_satellite_id" parameterTypeRef="uint8_c3_satellite_id_type" shortDescription="the unique oresat satellite id" />
+      <Parameter name="c3_beacon_revision" parameterTypeRef="uint8_type" shortDescription="the beacon revision number" />
+      <Parameter name="c3_status" parameterTypeRef="uint8_c3_status_type" shortDescription="" />
+      <Parameter name="c3_mode" parameterTypeRef="uint8_type" shortDescription="the oresat system mode" />
+      <Parameter name="c3_system_uptime" parameterTypeRef="uint32_s_type" shortDescription="uptime" />
+      <Parameter name="c3_system_unix_time" parameterTypeRef="unix_time_type" shortDescription="unix time" />
+      <Parameter name="c3_system_power_cycles" parameterTypeRef="uint16_type" shortDescription="the number of power cycles" />
+      <Parameter name="c3_uhf_rx_bytes" parameterTypeRef="uint32_B_type" shortDescription="uhf received byte count" />
+      <Parameter name="c3_uhf_rx_packets" parameterTypeRef="uint32_type" shortDescription="uhf received packet count" />
+      <Parameter name="c3_uhf_rssi" parameterTypeRef="int8_dB_type" shortDescription="uhf rssi of last packet received after lna, filters, and digital channel filter" />
+      <Parameter name="c3_edl_sequence_count" parameterTypeRef="uint32_type" shortDescription="edl sequence count" />
+      <Parameter name="c3_edl_rejected_count" parameterTypeRef="uint32_type" shortDescription="edl sequence count" />
+      <Parameter name="c3_fread_cache_length" parameterTypeRef="uint8_type" shortDescription="number of files in fread cache" />
+      <Parameter name="c3_fwrite_cache_length" parameterTypeRef="uint8_type" shortDescription="number of files in fwrite cache" />
+      <Parameter name="c3_updater_cache_length" parameterTypeRef="uint8_type" shortDescription="number of updates cached" />
+      <Parameter name="c3_adcs_manager_mode" parameterTypeRef="uint8_adcs_manager_mode_type" shortDescription="requested adcs mission mode to follow" />
+      <Parameter name="battery_1_pack_1_vbatt" parameterTypeRef="uint16_mV_type" shortDescription="pack voltage" />
+      <Parameter name="battery_1_pack_1_current" parameterTypeRef="int16_mA_type" shortDescription="pack current" />
+      <Parameter name="battery_1_pack_1_temperature" parameterTypeRef="int8_C_type" shortDescription="temperature of battery pack" />
+      <Parameter name="battery_1_pack_2_vbatt" parameterTypeRef="uint16_mV_type" shortDescription="pack voltage" />
+      <Parameter name="battery_1_pack_2_current" parameterTypeRef="int16_mA_type" shortDescription="pack current" />
+      <Parameter name="battery_1_pack_2_temperature" parameterTypeRef="int8_C_type" shortDescription="temperature of battery pack" />
+      <Parameter name="battery_2_pack_1_vbatt" parameterTypeRef="uint16_mV_type" shortDescription="pack voltage" />
+      <Parameter name="battery_2_pack_1_current" parameterTypeRef="int16_mA_type" shortDescription="pack current" />
+      <Parameter name="battery_2_pack_1_temperature" parameterTypeRef="int8_C_type" shortDescription="temperature of battery pack" />
+      <Parameter name="battery_2_pack_2_vbatt" parameterTypeRef="uint16_mV_type" shortDescription="pack voltage" />
+      <Parameter name="battery_2_pack_2_current" parameterTypeRef="int16_mA_type" shortDescription="pack current" />
+      <Parameter name="battery_2_pack_2_temperature" parameterTypeRef="int8_C_type" shortDescription="temperature of battery pack" />
+      <Parameter name="solar_1_output_power_avg" parameterTypeRef="uint16_mW_type" shortDescription="average power" />
+      <Parameter name="solar_2_output_power_avg" parameterTypeRef="uint16_mW_type" shortDescription="average power" />
+      <Parameter name="solar_2_output_power_max" parameterTypeRef="uint16_mW_type" shortDescription="max power" />
+      <Parameter name="solar_3_output_power_avg" parameterTypeRef="uint16_mW_type" shortDescription="average power" />
+      <Parameter name="solar_3_output_power_max" parameterTypeRef="uint16_mW_type" shortDescription="max power" />
+      <Parameter name="solar_4_output_power_avg" parameterTypeRef="uint16_mW_type" shortDescription="average power" />
+      <Parameter name="solar_5_output_power_avg" parameterTypeRef="uint16_mW_type" shortDescription="average power" />
+      <Parameter name="solar_5_output_power_max" parameterTypeRef="uint16_mW_type" shortDescription="max power" />
+      <Parameter name="solar_6_output_power_avg" parameterTypeRef="uint16_mW_type" shortDescription="average power" />
+      <Parameter name="solar_6_output_power_max" parameterTypeRef="uint16_mW_type" shortDescription="max power" />
+      <Parameter name="solar_7_output_power_avg" parameterTypeRef="uint16_mW_type" shortDescription="average power" />
+      <Parameter name="solar_8_output_power_avg" parameterTypeRef="uint16_mW_type" shortDescription="average power" />
+      <Parameter name="solar_8_output_power_max" parameterTypeRef="uint16_mW_type" shortDescription="max power" />
+      <Parameter name="solar_9_output_power_avg" parameterTypeRef="uint16_mW_type" shortDescription="average power" />
+      <Parameter name="solar_9_output_power_max" parameterTypeRef="uint16_mW_type" shortDescription="max power" />
+      <Parameter name="solar_10_output_power_avg" parameterTypeRef="uint16_mW_type" shortDescription="average power" />
+      <Parameter name="solar_11_output_power_avg" parameterTypeRef="uint16_mW_type" shortDescription="average power" />
+      <Parameter name="solar_11_output_power_max" parameterTypeRef="uint16_mW_type" shortDescription="max power" />
+      <Parameter name="solar_12_output_power_avg" parameterTypeRef="uint16_mW_type" shortDescription="average power" />
+      <Parameter name="solar_12_output_power_max" parameterTypeRef="uint16_mW_type" shortDescription="max power" />
+      <Parameter name="star_tracker_1_status" parameterTypeRef="uint8_star_tracker_1_status_type" shortDescription="" />
+      <Parameter name="gps_status" parameterTypeRef="uint8_gps_status_type" shortDescription="" />
+      <Parameter name="gps_skytraq_fix_mode" parameterTypeRef="uint8_gps_skytraq_fix_mode_type" shortDescription="" />
+      <Parameter name="adcs_gyroscope_roll_rate" parameterTypeRef="int16_degps_type" shortDescription="z-axis rate" />
+      <Parameter name="adcs_gyroscope_pitch_rate" parameterTypeRef="int16_degps_type" shortDescription="x-axis rate" />
+      <Parameter name="adcs_gyroscope_yaw_rate" parameterTypeRef="int16_degps_type" shortDescription="y-axis rate" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_1" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_1" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_1" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_1" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_1" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_1" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_1" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_2" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_2" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_2" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_2" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_2" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_2" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_2" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_3" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_3" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_3" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_3" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_3" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_3" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_3" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_4" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_4" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_4" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_4" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_4" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_4" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_4" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_5" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_5" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_5" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_5" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_5" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_5" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_5" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_6" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_6" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_6" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_6" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_6" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_6" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_6" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_7" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_7" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_7" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_7" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_7" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_7" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_7" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_8" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_8" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_8" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_8" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_8" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_8" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_8" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_9" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_9" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_9" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_9" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_9" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_9" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_9" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_10" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_10" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_10" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_10" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_10" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_10" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_10" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_11" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_11" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_11" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_11" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_11" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_11" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_11" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_12" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_12" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_12" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_12" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_12" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_12" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_12" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_13" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_13" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_13" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_13" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_13" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_13" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_13" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_14" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_14" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_14" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_14" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_14" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_14" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_14" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_15" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_15" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_15" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_15" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_15" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_15" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_15" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_16" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_16" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_16" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_16" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_16" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_16" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_16" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_17" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_17" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_17" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_17" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_17" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_17" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_17" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_18" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_18" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_18" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_18" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_18" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_18" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_18" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_19" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_19" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_19" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_19" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_19" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_19" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_19" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_20" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_20" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_20" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_20" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_20" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_20" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_20" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_21" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_21" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_21" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_21" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_21" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_21" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_21" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_22" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_22" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_22" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_22" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_22" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_22" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_22" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_23" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_23" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_23" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_23" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_23" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_23" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_23" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_24" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_24" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_24" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_24" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_24" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_24" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_24" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_25" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_25" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_25" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_25" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_25" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_25" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_25" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_26" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_26" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_26" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_26" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_26" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_26" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_26" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_27" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_27" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_27" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_27" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_27" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_27" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_27" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_28" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_28" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_28" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_28" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_28" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_28" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_28" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_29" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_29" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_29" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_29" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_29" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_29" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_29" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_30" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_30" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_30" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_30" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_30" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_30" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_30" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_31" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_31" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_31" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_31" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_31" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_31" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_31" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="c3_hist_ecef_x_ecef_x_32" parameterTypeRef="int32_km_type" shortDescription="ecef x coordinate" />
+      <Parameter name="c3_hist_ecef_y_ecef_y_32" parameterTypeRef="int32_km_type" shortDescription="ecef y coordinate" />
+      <Parameter name="c3_hist_ecef_z_ecef_z_32" parameterTypeRef="int32_km_type" shortDescription="ecef z coordinate" />
+      <Parameter name="c3_hist_ecef_vx_ecef_vx_32" parameterTypeRef="int32_km_type" shortDescription="ecef x velocity" />
+      <Parameter name="c3_hist_ecef_vy_ecef_vy_32" parameterTypeRef="int32_km_type" shortDescription="ecef y velocity" />
+      <Parameter name="c3_hist_ecef_vz_ecef_vz_32" parameterTypeRef="int32_km_type" shortDescription="ecef z velocity" />
+      <Parameter name="c3_hist_unix_time_time_32" parameterTypeRef="int32_s_type" shortDescription="gps data timestamp" />
+      <Parameter name="crc32" parameterTypeRef="uint32_type" shortDescription="crc check for beacon" />
+    </ParameterSet>
+    <ContainerSet>
+      <SequenceContainer name="Beacon">
+        <EntryList>
+          <ParameterRefEntry parameterRef="ax25_header" />
+          <ParameterRefEntry parameterRef="c3_beacon_start_chars" />
+          <ParameterRefEntry parameterRef="c3_satellite_id" />
+          <ParameterRefEntry parameterRef="c3_beacon_revision" />
+          <ParameterRefEntry parameterRef="c3_status" />
+          <ParameterRefEntry parameterRef="c3_mode" />
+          <ParameterRefEntry parameterRef="c3_system_uptime" />
+          <ParameterRefEntry parameterRef="c3_system_unix_time" />
+          <ParameterRefEntry parameterRef="c3_system_power_cycles" />
+          <ParameterRefEntry parameterRef="c3_uhf_rx_bytes" />
+          <ParameterRefEntry parameterRef="c3_uhf_rx_packets" />
+          <ParameterRefEntry parameterRef="c3_uhf_rssi" />
+          <ParameterRefEntry parameterRef="c3_edl_sequence_count" />
+          <ParameterRefEntry parameterRef="c3_edl_rejected_count" />
+          <ParameterRefEntry parameterRef="c3_fread_cache_length" />
+          <ParameterRefEntry parameterRef="c3_fwrite_cache_length" />
+          <ParameterRefEntry parameterRef="c3_updater_cache_length" />
+          <ParameterRefEntry parameterRef="c3_adcs_manager_mode" />
+          <ParameterRefEntry parameterRef="battery_1_pack_1_vbatt" />
+          <ParameterRefEntry parameterRef="battery_1_pack_1_current" />
+          <ParameterRefEntry parameterRef="battery_1_pack_1_temperature" />
+          <ParameterRefEntry parameterRef="battery_1_pack_2_vbatt" />
+          <ParameterRefEntry parameterRef="battery_1_pack_2_current" />
+          <ParameterRefEntry parameterRef="battery_1_pack_2_temperature" />
+          <ParameterRefEntry parameterRef="battery_2_pack_1_vbatt" />
+          <ParameterRefEntry parameterRef="battery_2_pack_1_current" />
+          <ParameterRefEntry parameterRef="battery_2_pack_1_temperature" />
+          <ParameterRefEntry parameterRef="battery_2_pack_2_vbatt" />
+          <ParameterRefEntry parameterRef="battery_2_pack_2_current" />
+          <ParameterRefEntry parameterRef="battery_2_pack_2_temperature" />
+          <ParameterRefEntry parameterRef="solar_1_output_power_avg" />
+          <ParameterRefEntry parameterRef="solar_2_output_power_avg" />
+          <ParameterRefEntry parameterRef="solar_2_output_power_max" />
+          <ParameterRefEntry parameterRef="solar_3_output_power_avg" />
+          <ParameterRefEntry parameterRef="solar_3_output_power_max" />
+          <ParameterRefEntry parameterRef="solar_4_output_power_avg" />
+          <ParameterRefEntry parameterRef="solar_5_output_power_avg" />
+          <ParameterRefEntry parameterRef="solar_5_output_power_max" />
+          <ParameterRefEntry parameterRef="solar_6_output_power_avg" />
+          <ParameterRefEntry parameterRef="solar_6_output_power_max" />
+          <ParameterRefEntry parameterRef="solar_7_output_power_avg" />
+          <ParameterRefEntry parameterRef="solar_8_output_power_avg" />
+          <ParameterRefEntry parameterRef="solar_8_output_power_max" />
+          <ParameterRefEntry parameterRef="solar_9_output_power_avg" />
+          <ParameterRefEntry parameterRef="solar_9_output_power_max" />
+          <ParameterRefEntry parameterRef="solar_10_output_power_avg" />
+          <ParameterRefEntry parameterRef="solar_11_output_power_avg" />
+          <ParameterRefEntry parameterRef="solar_11_output_power_max" />
+          <ParameterRefEntry parameterRef="solar_12_output_power_avg" />
+          <ParameterRefEntry parameterRef="solar_12_output_power_max" />
+          <ParameterRefEntry parameterRef="star_tracker_1_status" />
+          <ParameterRefEntry parameterRef="gps_status" />
+          <ParameterRefEntry parameterRef="gps_skytraq_fix_mode" />
+          <ParameterRefEntry parameterRef="adcs_gyroscope_roll_rate" />
+          <ParameterRefEntry parameterRef="adcs_gyroscope_pitch_rate" />
+          <ParameterRefEntry parameterRef="adcs_gyroscope_yaw_rate" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_1" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_1" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_1" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_1" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_1" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_1" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_1" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_2" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_2" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_2" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_2" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_2" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_2" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_2" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_3" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_3" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_3" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_3" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_3" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_3" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_3" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_4" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_4" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_4" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_4" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_4" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_4" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_4" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_5" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_5" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_5" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_5" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_5" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_5" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_5" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_6" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_6" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_6" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_6" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_6" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_6" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_6" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_7" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_7" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_7" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_7" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_7" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_7" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_7" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_8" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_8" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_8" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_8" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_8" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_8" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_8" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_9" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_9" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_9" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_9" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_9" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_9" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_9" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_10" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_10" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_10" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_10" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_10" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_10" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_10" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_11" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_11" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_11" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_11" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_11" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_11" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_11" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_12" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_12" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_12" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_12" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_12" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_12" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_12" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_13" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_13" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_13" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_13" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_13" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_13" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_13" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_14" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_14" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_14" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_14" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_14" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_14" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_14" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_15" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_15" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_15" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_15" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_15" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_15" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_15" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_16" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_16" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_16" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_16" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_16" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_16" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_16" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_17" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_17" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_17" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_17" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_17" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_17" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_17" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_18" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_18" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_18" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_18" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_18" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_18" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_18" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_19" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_19" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_19" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_19" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_19" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_19" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_19" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_20" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_20" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_20" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_20" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_20" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_20" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_20" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_21" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_21" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_21" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_21" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_21" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_21" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_21" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_22" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_22" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_22" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_22" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_22" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_22" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_22" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_23" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_23" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_23" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_23" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_23" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_23" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_23" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_24" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_24" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_24" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_24" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_24" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_24" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_24" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_25" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_25" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_25" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_25" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_25" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_25" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_25" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_26" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_26" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_26" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_26" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_26" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_26" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_26" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_27" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_27" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_27" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_27" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_27" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_27" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_27" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_28" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_28" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_28" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_28" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_28" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_28" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_28" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_29" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_29" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_29" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_29" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_29" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_29" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_29" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_30" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_30" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_30" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_30" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_30" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_30" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_30" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_31" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_31" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_31" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_31" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_31" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_31" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_31" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_x_ecef_x_32" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_y_ecef_y_32" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_z_ecef_z_32" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vx_ecef_vx_32" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vy_ecef_vy_32" />
+          <ParameterRefEntry parameterRef="c3_hist_ecef_vz_ecef_vz_32" />
+          <ParameterRefEntry parameterRef="c3_hist_unix_time_time_32" />
+          <ParameterRefEntry parameterRef="crc32" />
+        </EntryList>
+      </SequenceContainer>
+    </ContainerSet>
+  </TelemetryMetaData>
+</SpaceSystem>

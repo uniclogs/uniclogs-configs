@@ -7,10 +7,17 @@ services:
         allowOrigin: "*"
         allowCredentials: false
 
-dataDir: yamcs-data
+dataDir: ../../yamcs-data # should be in the root directory of the repo. Should be updated later, but for testing should be decent.
 
 instances:
   - oresat0
   - oresat0_5
+  - sentinel
 
 secretKey: <CHANGE THIS VALUE>
+
+buckets:
+  - name: docs
+    # This is set to look at the docs folder because it already exists and has a smallish 
+    # and a largish file, making it decent testing in the immediate term.
+    path: ../../docs
